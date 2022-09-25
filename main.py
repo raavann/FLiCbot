@@ -21,12 +21,15 @@ async def info(
 ):
     await ctx.response.defer()
     member = await find({str(whatyouknow):str(value)})
-    await ctx.respond(embed=discord.Embed(title="Information", color=discord.Color.green(), description="Information of users")
-    .add_field(name= "Name", value=member["name"], inline=False)
-    .add_field(name="Email", value=member['email'], inline=False)
-    .add_field(name="Branch", value=member['branch'], inline=False)
-    .add_field(name="Batch", value=member['batch'], inline=False)
-    .add_field(name="Discord Username", value=ctx.guild.get_member(int(member['discordId'])) ) ,delete_after=15)
+    if(member != None):
+        await ctx.respond(embed=discord.Embed(title="Information", color=discord.Color.green(), description="Information of users")
+        .add_field(name= "Name", value=member["name"], inline=False)
+        .add_field(name="Email", value=member['email'], inline=False)
+        .add_field(name="Branch", value=member['branch'], inline=False)
+        .add_field(name="Batch", value=member['batch'], inline=False)
+        .add_field(name="Discord Username", value=ctx.guild.get_member(int(member['discordId'])) ) ,delete_after=15)
+    else:
+        await ctx.respond("No user found with this information", delete_after=15)
 
 @bot.slash_command()
 async def infoall(
