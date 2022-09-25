@@ -21,7 +21,7 @@ async def info(
 ):
     await ctx.response.defer()
     member = await find({str(whatyouknow):str(value)})
-    if(member != None):
+    if(member):
         await ctx.respond(embed=discord.Embed(title="Information", color=discord.Color.green(), description="Information of users")
         .add_field(name= "Name", value=member["name"], inline=False)
         .add_field(name="Email", value=member['email'], inline=False)
@@ -59,5 +59,4 @@ async def infoall(
 # from dotenv import load_dotenv
 import os
 # load_dotenv()
-print(os.getenv('TOKEN'))
 bot.run(os.getenv('TOKEN'))
