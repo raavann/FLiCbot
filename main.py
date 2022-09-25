@@ -53,7 +53,8 @@ async def infoall(
     
     await ctx.respond(msg, delete_after=15)
 
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
-load_dotenv()
+# load_dotenv()
+print(os.getenv('TOKEN'))
 bot.run(os.getenv('TOKEN'))
