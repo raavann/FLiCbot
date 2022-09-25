@@ -14,16 +14,16 @@ class Verify(discord.ui.Modal):
         isequal = False
         if (member != None and str(member['passCode']) == str(self.children[1].value)):
             isequal = True
-            await interaction.channel.send(f"{interaction.user.mention} has been verified!", delete_after=30)
+            await interaction.user.send(f"{interaction.user} has been verified!")
         else:
-            await interaction.channel.send(f"{interaction.user.mention} Invalid email or pass code", delete_after=30)
+            await interaction.user.send(f"{interaction.user } Invalid email or pass code")
 
         if(isequal):
             await interaction.user.add_roles(interaction.guild.get_role(1015227226406522923))
             await interaction.user.remove_roles(interaction.guild.get_role(1021877916579143872))
             rand = Random().randint(10000, 999999)
-            await update({
-                "email":self.children[0].value}, 
+            await update(
+                {"email":self.children[0].value},
                 {"$set":{
                     "passCode": rand, 
                     "discordId":str(interaction.user.id)

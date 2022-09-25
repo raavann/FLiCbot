@@ -17,6 +17,7 @@ dummypayload = {
     "dataSource": "Cluster0"
 }
 
+# async function, give it filter and it will return the result in dictionary
 async def find(filt : dict) -> dict:
     newpayload = dummypayload
     newpayload['filter'] = filt
