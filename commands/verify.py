@@ -2,6 +2,10 @@ from random import Random
 import discord
 from db import find ,update
 from datetime import datetime
+
+import logging
+logging.basicConfig(filename='output.log', encoding='utf-8', level=logging.DEBUG)
+
 class Verify(discord.ui.Modal):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
@@ -11,7 +15,9 @@ class Verify(discord.ui.Modal):
     async def callback(self, interaction: discord.Interaction):
         await interaction.response.defer()
         member = await find({"email": self.children[0].value})
-        print( datetime.now() ,member)
+        # print( datetime.now() ,member)
+        logging.info(datetime.now(), member)
+
         isequal = False
         if (member != None and type(member)==dict and str(member['passCode']) == str(self.children[1].value)):
             isequal = True
