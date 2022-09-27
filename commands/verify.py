@@ -16,7 +16,7 @@ class Verify(discord.ui.Modal):
         await interaction.response.defer()
         member = await find({"email": self.children[0].value})
         # print( datetime.now() ,member)
-        logging.warn(datetime.now(), member)
+        logging.warning(datetime.now(), member)
 
         isequal = False
         if (member != None and type(member)==dict and str(member['passCode']) == str(self.children[1].value)):
