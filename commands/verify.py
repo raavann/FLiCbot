@@ -1,7 +1,7 @@
 from random import Random
 import discord
 from db import find ,update
-
+from datetime import datetime
 class Verify(discord.ui.Modal):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
@@ -11,9 +11,9 @@ class Verify(discord.ui.Modal):
     async def callback(self, interaction: discord.Interaction):
         await interaction.response.defer()
         member = await find({"email": self.children[0].value})
-            
+        print( datetime.now() ,member)
         isequal = False
-        if (member != None and member!=str and str(member['passCode']) == str(self.children[1].value)):
+        if (member != None and member!=dict and str(member['passCode']) == str(self.children[1].value)):
             isequal = True
             await interaction.user.send(f"{interaction.user} has been verified!")
         else:

@@ -26,9 +26,8 @@ async def find(filt : dict) -> dict:
     async with aiohttp.ClientSession() as session:
         async with session.post(url = 'https://data.mongodb-api.com/app/data-mkxfx/endpoint/data/v1/action/findOne', data = payload, headers=headers) as response:
             html = await response.json(content_type=None)
-            print(type(html))
-            print(html)
-            if(type(html) == str):
+            
+            if(type(html) != dict):
                 return html
             return(html['document'])
 
