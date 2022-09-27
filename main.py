@@ -6,7 +6,6 @@ from commands.verify import Verify
 async def verify(ctx: discord.ApplicationContext):
     # modal = Verify(title="Verify yourself")
     # await ctx.send_modal(modal)
-    await ctx.response.defer()
     if(ctx.channel_id == 1021877729446068345):
         modal = Verify(title="Verify yourself")
         await ctx.send_modal(modal)
