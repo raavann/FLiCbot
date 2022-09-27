@@ -4,7 +4,7 @@ from db import find ,update
 from datetime import datetime
 
 import logging
-logging.basicConfig(filename='output.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename='output.log', encoding='utf-8', level=logging.WARNING,)
 
 class Verify(discord.ui.Modal):
     def __init__(self, *args, **kwargs) -> None:
@@ -16,7 +16,7 @@ class Verify(discord.ui.Modal):
         await interaction.response.defer()
         member = await find({"email": self.children[0].value})
         # print( datetime.now() ,member)
-        logging.info(datetime.now(), member)
+        logging.warn(datetime.now(), member)
 
         isequal = False
         if (member != None and type(member)==dict and str(member['passCode']) == str(self.children[1].value)):
