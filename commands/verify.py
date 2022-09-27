@@ -13,11 +13,10 @@ class Verify(discord.ui.Modal):
         member = await find({"email": self.children[0].value})
         print( datetime.now() ,member)
         isequal = False
-        if (member != None and member!=dict and str(member['passCode']) == str(self.children[1].value)):
+        if (member != None and type(member)==dict and str(member['passCode']) == str(self.children[1].value)):
             isequal = True
             await interaction.user.send(f"{interaction.user} has been verified!")
         else:
-            print(member)
             await interaction.user.send(f"{interaction.user } Invalid email or pass code")
 
         if(isequal):
