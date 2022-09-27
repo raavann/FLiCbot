@@ -11,11 +11,13 @@ class Verify(discord.ui.Modal):
     async def callback(self, interaction: discord.Interaction):
         await interaction.response.defer()
         member = await find({"email": self.children[0].value})
+            
         isequal = False
-        if (member != None and str(member['passCode']) == str(self.children[1].value)):
+        if (member != None and member!=str and str(member['passCode']) == str(self.children[1].value)):
             isequal = True
             await interaction.user.send(f"{interaction.user} has been verified!")
         else:
+            print(member)
             await interaction.user.send(f"{interaction.user } Invalid email or pass code")
 
         if(isequal):
