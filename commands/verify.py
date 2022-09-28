@@ -4,7 +4,7 @@ from db import find ,update
 from datetime import datetime
 
 import logging
-logging.basicConfig(filename='output.log', encoding='utf-8', level=logging.WARNING,)
+logging.basicConfig(filename='output.log', encoding='utf-8', level=logging.WARNING)
 
 class Verify(discord.ui.Modal):
     def __init__(self, *args, **kwargs) -> None:
@@ -28,12 +28,10 @@ class Verify(discord.ui.Modal):
         if(isequal):
             await interaction.user.add_roles(interaction.guild.get_role(1015227226406522923))
             await interaction.user.remove_roles(interaction.guild.get_role(1021877916579143872))
-            rand = Random().randint(10000, 999999)
+            replace = member
+            replace['passCode'] = Random().randint(10000, 999999)
+            replace['discordId'] = str(interaction.user.id)
             await update(
                 {"email":self.children[0].value},
-                {"$set":{
-                    "passCode": rand, 
-                    "discordId":str(interaction.user.id)
-                    }
-                }
+                replace
             )
